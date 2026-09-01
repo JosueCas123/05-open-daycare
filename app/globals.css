@@ -1,26 +1,81 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f6ecdf;
+  --foreground: #3f362e;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-nunito);
+  --font-display: var(--font-fredoka);
+
+  --color-cream: #f6ecdf;
+  --color-card: #fffdf9;
+  --color-line: #ece0d0;
+  --color-divider: #e7dac8;
+  --color-card-divider: #f0e6d8;
+
+  --color-ink: #3f362e;
+  --color-body: #4a4038;
+  --color-muted: #a89a8b;
+  --color-muted-strong: #94887b;
+  --color-muted-label: #8a7c6d;
+  --color-muted-nav: #6e6359;
+  --color-muted-faint: #b0a290;
+
+  --color-coral: #f2937a;
+  --color-coral-gradient: #f4977e;
+  --color-coral-deep: #ee8164;
+  --color-coral-text: #e0654a;
+  --color-coral-accent: #d9583c;
+  --color-coral-dark: #c5503a;
+  --color-coral-soft: #fbe3d8;
+
+  --color-logro-bg: #cfe9d8;
+  --color-logro-text: #3e9b6c;
+
+  --color-actividad-bg: #c7e7f1;
+  --color-actividad-text: #2e89a6;
+  --color-actividad-avatar-bg: #a9d9e8;
+  --color-actividad-avatar-text: #1f7a93;
+
+  --color-anuncio-bg: #ccd8f4;
+  --color-anuncio-text: #4e72c8;
+
+  --color-photo-border: #dbcdba;
+  --color-photo-bg: #f4ece1;
+  --color-scrollbar: #e4d6c4;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-nunito), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #e4d6c4;
+    border-radius: 8px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
 }
