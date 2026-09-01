@@ -47,6 +47,7 @@ The `references/pantallas/` directory contains HTML prototypes built with a cust
 
 - /spec Usaremos esta habilidad para crear las especificaciones 
 - /spec-impl Usaremos esta skill para hacer las implementaciones.
+- /spec-verify Usaremos este agente (`.opencode/agents/spec-verify.md`) para verificar los criterios de aceptación de una spec contra la app implementada y marcar los checkboxes.
 
 ## Reglas de codigo
 

@@ -70,13 +70,13 @@ Paleta del template como tokens de Tailwind v4 (`@theme inline` en `globals.css`
 
 ## Acceptance criteria
 
-- [ ] `npm run build` termina sin errores y `npx tsc --noEmit` no reporta errores.
+- [x] `npm run build` termina sin errores y `npx tsc --noEmit` no reporta errores.
 - [ ] En ~1280×900, `/` se ve idéntico a `references/screenshots/feed.png`: sidebar 248px, header, 3 post cards, badges y contadores.
-- [ ] Fredoka y Nunito se sirven vía `next/font` (no hay `<link>` a `fonts.googleapis.com` en el HTML renderizado).
-- [ ] La sidebar muestra brand "OpenDayCare / Sala Soles", botón "Nueva publicación" con gradiente coral, nav con "Feed" destacado, y footer "Caro Giménez · Maestra · Soles" con enlace de logout.
-- [ ] El feed muestra exactamente 3 posts en orden: logro "¡Usó el orinal solito…" (3 likes, 1 comentario), actividad "Pintamos con témperas…" con placeholder de foto (5 likes, 2 comentarios), anuncio "El viernes salimos al parque…" (8 likes, 0 comentarios).
-- [ ] Todos los enlaces de la sidebar, cards y botones apuntan a `#`.
-- [ ] No hay errores en la consola del navegador al cargar `/`.
+- [x] Fredoka y Nunito se sirven vía `next/font` (no hay `<link>` a `fonts.googleapis.com` en el HTML renderizado).
+- [x] La sidebar muestra brand "OpenDayCare / Sala Soles", botón "Nueva publicación" con gradiente coral, nav con "Feed" destacado, y footer "Caro Giménez · Maestra · Soles" con enlace de logout.
+- [x] El feed muestra exactamente 3 posts en orden: logro "¡Usó el orinal solito…" (3 likes, 1 comentario), actividad "Pintamos con témperas…" con placeholder de foto (5 likes, 2 comentarios), anuncio "El viernes salimos al parque…" (8 likes, 0 comentarios).
+- [x] Todos los enlaces de la sidebar, cards y botones apuntan a `#`.
+- [x] No hay errores en la consola del navegador al cargar `/`.
 
 ## Decisions
 
