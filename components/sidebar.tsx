@@ -1,18 +1,19 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { currentUser, sala } from "@/lib/feed-data";
 
 interface NavItem {
+  id: "feed" | "ninos" | "avisos" | "cuenta";
   label: string;
   href: string;
-  active?: boolean;
   icon: ReactNode;
 }
 
 const NAV_ITEMS: NavItem[] = [
   {
+    id: "feed",
     label: "Feed",
-    href: "#",
-    active: true,
+    href: "/",
     icon: (
       <svg
         width="19"
@@ -29,8 +30,9 @@ const NAV_ITEMS: NavItem[] = [
     ),
   },
   {
+    id: "ninos",
     label: "Niños",
-    href: "#",
+    href: "/kids",
     icon: (
       <svg
         width="19"
@@ -49,6 +51,7 @@ const NAV_ITEMS: NavItem[] = [
     ),
   },
   {
+    id: "avisos",
     label: "Avisos",
     href: "#",
     icon: (
@@ -67,6 +70,7 @@ const NAV_ITEMS: NavItem[] = [
     ),
   },
   {
+    id: "cuenta",
     label: "Mi cuenta",
     href: "#",
     icon: (
@@ -87,7 +91,11 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
-export function Sidebar() {
+interface SidebarProps {
+  active?: "feed" | "ninos";
+}
+
+export function Sidebar({ active = "feed" }: SidebarProps) {
   return (
     <aside className="flex h-screen w-[248px] flex-none flex-col px-4 py-6 sticky top-0 bg-card border-r border-line">
       <a
@@ -148,20 +156,23 @@ export function Sidebar() {
       </a>
 
       <nav className="flex flex-1 flex-col gap-1">
-        {NAV_ITEMS.map((item) => (
-          <a
-            key={item.label}
-            href={item.href}
-            className={
-              item.active
-                ? "flex items-center gap-3 rounded-xl bg-coral-soft px-3 py-[11px] text-[14.5px] font-extrabold text-coral-accent"
-                : "flex items-center gap-3 rounded-xl bg-transparent px-3 py-[11px] text-[14.5px] font-semibold text-muted-nav"
-            }
-          >
-            {item.icon}
-            {item.label}
-          </a>
-        ))}
+        {NAV_ITEMS.map((item) => {
+          const isActive = active === item.id;
+          return (
+            <Link
+              key={item.id}
+              href={item.href}
+              className={
+                isActive
+                  ? "flex items-center gap-3 rounded-xl bg-coral-soft px-3 py-[11px] text-[14.5px] font-extrabold text-coral-accent"
+                  : "flex items-center gap-3 rounded-xl bg-transparent px-3 py-[11px] text-[14.5px] font-semibold text-muted-nav"
+              }
+            >
+              {item.icon}
+              {item.label}
+            </Link>
+          );
+        })}
       </nav>
 
       <div className="mt-[10px] border-t border-line pt-[14px]">
