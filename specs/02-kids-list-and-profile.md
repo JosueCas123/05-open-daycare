@@ -71,15 +71,15 @@ Reutiliza la paleta de tokens ya definida en `globals.css` (spec 01), más los c
 
 ## Acceptance criteria
 
-- [ ] `npm run build` termina sin errores y `npx tsc --noEmit` no reporta errores.
-- [ ] En ~1280×900, `/kids` se ve idéntico a la lista de referencia: header, botón "Agregar niño", buscador, divisor "SALA SOLES · 8 niños" y grid de 2 columnas con 8 cards.
-- [ ] En `/kids` y `/kids/[id]` la sidebar marca "Niños" activo; en `/` sigue activa "Feed".
-- [ ] El nav "Niños" de la sidebar conduce a `/kids`.
-- [ ] Cada card de niño conduce a `/kids/<id>`.
-- [ ] En `/kids/mateo-fernandez` se ve el perfil de referencia (avatar "M", nombre, alergias al maní, tabla, resumen del día, padres Lucía ACTIVA / Diego PENDIENTE + "Vincular otro padre").
-- [ ] Un id inexistente muestra estado "no encontrado" sin errores en consola.
-- [ ] Botones "Agregar niño", "Editar", "Resumen del día" y "Vincular otro padre" apuntan a `#`.
-- [ ] No hay errores en consola al cargar `/kids` y `/kids/mateo-fernandez`.
+- [x] `npm run build` termina sin errores y `npx tsc --noEmit` no reporta errores.
+- [x] En ~1280×900, `/kids` se ve idéntico a la lista de referencia: header, botón "Agregar niño", buscador, divisor "SALA SOLES · 8 niños" y grid de 2 columnas con 8 cards.
+- [x] En `/kids` y `/kids/[id]` la sidebar marca "Niños" activo; en `/` sigue activa "Feed".
+- [x] El nav "Niños" de la sidebar conduce a `/kids`.
+- [x] Cada card de niño conduce a `/kids/<id>`.
+- [x] En `/kids/mateo-fernandez` se ve el perfil de referencia (avatar "M", nombre, alergias al maní, tabla, resumen del día, padres Lucía ACTIVA / Diego PENDIENTE + "Vincular otro padre").
+- [x] Un id inexistente muestra estado "no encontrado" sin errores en consola.
+- [x] Botones "Agregar niño", "Editar", "Resumen del día" y "Vincular otro padre" apuntan a `#`.
+- [x] No hay errores en consola al cargar `/kids` y `/kids/mateo-fernandez`.
 
 ## Decisions
 
