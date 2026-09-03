@@ -1,13 +1,30 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "lsp": {
+    "typescript": {
+      "command": ["typescript-language-server", "--stdio"],
+      "extensions": [".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".mts", ".cts"]
+    },
+    "eslint": {
+      "command": ["eslint", "--stdin"],
+      "extensions": [".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".mts", ".cts"]
+    }
+  },
   "command": {
   "spec": {
     "description": "Crea especificaciones de pantallas y funcionalidades",
     "template": "Carga y sigue la skill spec en .agents/skills/spec/SKILL.md.\n\nFeature: $ARGUMENTS"
   },
+
   "spec-impl": {
     "description": "Implementa especificaciones de pantallas y funcionalidades",
     "template": "Carga y sigue la skill spec-impl en .agents/skills/spec-impl/SKILL.md.\n\nFeature: $ARGUMENTS"
+  }
+},
+"references": {
+  "docs": {
+    "path": "../07-DB-Schema",
+    "description": "Esquema de la base de datos, tablas, columnas, a crear esto no esta implementado en la base de datos, solo es para referencia"
   }
 },
   "mcp": {
