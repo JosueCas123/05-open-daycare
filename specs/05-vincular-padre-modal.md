@@ -1,6 +1,6 @@
 # SPEC 05 — Modal de vincular padre
 
-> **Estado:** Aprobado
+> **Estado:** Implementado
 > **Depende de:** SPEC 02
 > **Fecha:** 2026-09-03
 > **Objetivo:** Al presionar "Vincular otro padre" en el perfil de un niño, abrir un modal superpuesto que replica el formulario de `references/pantallas/vincular-padre.dc.html`, con campos nombre, email y parentesco, validación de formato de email, y código de invitación estático.
@@ -52,18 +52,18 @@ type ParentFormState = {
 
 ## Acceptance criteria
 
-- [ ] `npm run build` termina sin errores y `npx tsc --noEmit` no reporta errores.
-- [ ] En `/kids/mateo-fernandez`, al pulsar "Vincular otro padre" se abre un modal superpuesto (overlay oscuro) sobre el perfil, sin cambiar de ruta.
-- [ ] El modal replica el formulario de `vincular-padre.dc.html`: header con "Vincular padre" / "a Mateo Fernández" / botón X, cuadro informativo azul, campos NOMBRE DEL PADRE/MADRE, EMAIL, PARENTESCO (Mamá / Papá / Tutor/a), recuadro amarillo con código `7K4P9` y "Vence en 7 días", botón "Enviar invitación".
-- [ ] "Enviar invitación" está deshabilitado mientras falten NOMBRE DEL PADRE/MADRE, EMAIL o PARENTESCO.
-- [ ] Al completar los 3 campos, "Enviar invitación" se habilita y apunta a `#` (botón muerto, no agrega el padre).
-- [ ] Si el campo EMAIL tiene contenido pero no tiene formato válido de email, se muestra un indicador de error visual y "Enviar invitación" permanece deshabilitado.
-- [ ] El parentesco "Mamá" viene seleccionado por defecto al abrir el modal.
-- [ ] El código de invitación es `7K4P9` con texto "Vence en 7 días".
-- [ ] El nombre del niño en el header del modal se muestra dinámicamente (ej. "a Mateo Fernández").
-- [ ] "Cancelar" (botón X) cierra el modal y el perfil permanece sin cambios.
-- [ ] No hay errores en consola al abrir/cerrar el modal.
-- [ ] La página `/kids/mateo-fernandez` sigue viéndose idéntica con el modal cerrado.
+- [x] `npm run build` termina sin errores y `npx tsc --noEmit` no reporta errores.
+- [x] En `/kids/mateo-fernandez`, al pulsar "Vincular otro padre" se abre un modal superpuesto (overlay oscuro) sobre el perfil, sin cambiar de ruta.
+- [x] El modal replica el formulario de `vincular-padre.dc.html`: header con "Vincular padre" / "a Mateo Fernández" / botón X, cuadro informativo azul, campos NOMBRE DEL PADRE/MADRE, EMAIL, PARENTESCO (Mamá / Papá / Tutor/a), recuadro amarillo con código `7K4P9` y "Vence en 7 días", botón "Enviar invitación".
+- [x] "Enviar invitación" está deshabilitado mientras falten NOMBRE DEL PADRE/MADRE, EMAIL o PARENTESCO.
+- [x] Al completar los 3 campos, "Enviar invitación" se habilita y apunta a `#` (botón muerto, no agrega el padre).
+- [x] Si el campo EMAIL tiene contenido pero no tiene formato válido de email, se muestra un indicador de error visual y "Enviar invitación" permanece deshabilitado.
+- [x] El parentesco "Mamá" viene seleccionado por defecto al abrir el modal.
+- [x] El código de invitación es `7K4P9` con texto "Vence en 7 días".
+- [x] El nombre del niño en el header del modal se muestra dinámicamente (ej. "a Mateo Fernández").
+- [x] "Cancelar" (botón X) cierra el modal y el perfil permanece sin cambios.
+- [x] No hay errores en consola al abrir/cerrar el modal.
+- [x] La página `/kids/mateo-fernandez` sigue viéndose idéntica con el modal cerrado.
 
 ## Decisions
 
