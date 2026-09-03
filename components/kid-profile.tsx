@@ -1,5 +1,6 @@
 import type { Kid, ParentLink } from "@/lib/ninos-data";
 import { roomName } from "@/lib/ninos-data";
+import { LinkParentModal } from "@/components/link-parent-modal";
 
 interface KidProfileProps {
   kid: Kid;
@@ -145,28 +146,7 @@ export function KidProfile({ kid }: KidProfileProps) {
             {kid.parents.map((parent) => (
               <ParentRow key={parent.id} parent={parent} />
             ))}
-            <a
-              href="#"
-              className="flex items-center gap-3 pb-0 pt-2"
-            >
-              <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full border-[1.5px] border-dashed border-[#D8CBBA] text-[#B0A290]">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 5v14M5 12h14" />
-                </svg>
-              </span>
-              <span className="text-[14.5px] font-extrabold text-coral-dark">
-                Vincular otro padre
-              </span>
-            </a>
+            <LinkParentModal kidName={kid.name} />
           </div>
         </div>
       </div>
