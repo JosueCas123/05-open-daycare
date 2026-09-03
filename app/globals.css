@@ -47,6 +47,16 @@
   --color-photo-border: #dbcdba;
   --color-photo-bg: #f4ece1;
   --color-scrollbar: #e4d6c4;
+
+  --color-login-bg: #fbf4ec;
+  --color-login-input-bg: #ffffff;
+  --color-login-input-border: #eadfd0;
+  --color-login-placeholder: #b6a99b;
+  --color-login-label: #94887b;
+  --color-login-subtext: #94887b;
+  --color-checkbox-bg: #fbf1d6;
+  --color-checkbox-text: #8a7234;
+  --color-checkbox-check: #5fb97e;
 }
 
 @layer base {
