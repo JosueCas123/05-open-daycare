@@ -58,19 +58,19 @@ Tipos reutilizados de `lib/feed-data.ts` (`PostType`) y `lib/ninos-data.ts` (`ki
 
 ## Acceptance criteria
 
-- [ ] `npm run build` termina sin errores y `npx tsc --noEmit` no reporta errores.
-- [ ] En `/`, al pulsar "Nueva publicación" en el sidebar se abre un modal superpuesto (overlay oscuro) sobre el feed, sin cambiar de ruta.
-- [ ] El modal replica el formulario de `crear-publicacion.dc.html`: header con "Cancelar" / "Nueva publicación" / "Publicar", sección PARA con pills por niño + "Toda la sala", sección TIPO con 7 pills de categoría, sección DESCRIPCIÓN (textarea), sección FOTOS (foto placeholder + botón "Agregar").
-- [ ] Los pills de PARA muestran el avatar (letter + color de fondo) y nombre de cada niño de `lib/ninos-data.ts`.
-- [ ] Click en un pill de PARA selecciona/deselecciona el niño con estado visual (fondo oscuro/texto blanco cuando activo, fondo claro/borde cuando inactivo).
-- [ ] Click en "Toda la sala" selecciona todos los niños; click en un niño individual deselecciona "Toda la sala".
-- [ ] Los pills de TIPO muestran los colores del template y funcionan como radio (solo uno seleccionado a la vez).
-- [ ] Click en el tipo ya seleccionado lo deselecciona.
-- [ ] "Publicar" está deshabilitado si faltan tipo, niño seleccionado o descripción.
-- [ ] Al completar tipo, niño y descripción, "Publicar" se habilita y apunta a `#` (botón muerto, no agrega la publicación).
-- [ ] "Cancelar" cierra el modal y el feed permanece sin cambios.
-- [ ] No hay errores en consola al abrir/cerrar el modal.
-- [ ] La página `/` sigue viéndose idéntica a la de SPEC 01 con el modal cerrado.
+- [x] `npm run build` termina sin errores y `npx tsc --noEmit` no reporta errores.
+- [x] En `/`, al pulsar "Nueva publicación" en el sidebar se abre un modal superpuesto (overlay oscuro) sobre el feed, sin cambiar de ruta.
+- [x] El modal replica el formulario de `crear-publicacion.dc.html`: header con "Cancelar" / "Nueva publicación" / "Publicar", sección PARA con pills por niño + "Toda la sala", sección TIPO con 7 pills de categoría, sección DESCRIPCIÓN (textarea), sección FOTOS (foto placeholder + botón "Agregar").
+- [x] Los pills de PARA muestran el avatar (letter + color de fondo) y nombre de cada niño de `lib/ninos-data.ts`.
+- [x] Click en un pill de PARA selecciona/deselecciona el niño con estado visual (fondo oscuro/texto blanco cuando activo, fondo claro/borde cuando inactivo).
+- [x] Click en "Toda la sala" selecciona todos los niños; click en un niño individual deselecciona "Toda la sala".
+- [x] Los pills de TIPO muestran los colores del template y funcionan como radio (solo uno seleccionado a la vez).
+- [x] Click en el tipo ya seleccionado lo deselecciona.
+- [x] "Publicar" está deshabilitado si faltan tipo, niño seleccionado o descripción.
+- [x] Al completar tipo, niño y descripción, "Publicar" se habilita y apunta a `#` (botón muerto, no agrega la publicación).
+- [x] "Cancelar" cierra el modal y el feed permanece sin cambios.
+- [x] No hay errores en consola al abrir/cerrar el modal.
+- [x] La página `/` sigue viéndose idéntica a la de SPEC 01 con el modal cerrado.
 
 ## Decisions
 
