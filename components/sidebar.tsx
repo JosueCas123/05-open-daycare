@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { currentUser, sala } from "@/lib/feed-data";
+import { CreatePostModal } from "@/components/create-post-modal";
 
 interface NavItem {
   id: "feed" | "ninos" | "avisos" | "cuenta";
@@ -132,28 +133,25 @@ export function Sidebar({ active = "feed" }: SidebarProps) {
         </div>
       </a>
 
-      <a
-        href="#"
-        className="mb-[18px] flex w-full items-center justify-center gap-2 rounded-[14px] px-3 py-3 text-[14.5px] font-extrabold text-white"
-        style={{
-          background: "linear-gradient(180deg,#F4977E,#EE8164)",
-          boxShadow: "0 8px 18px -8px rgba(238,129,100,.75)",
-        }}
-      >
-        <svg
-          width="17"
-          height="17"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#fff"
-          strokeWidth="2.4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M12 5v14M5 12h14" />
-        </svg>
-        Nueva publicación
-      </a>
+      <CreatePostModal
+        trigger={
+          <span className="flex w-full items-center justify-center gap-2">
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#fff"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+            Nueva publicación
+          </span>
+        }
+      />
 
       <nav className="flex flex-1 flex-col gap-1">
         {NAV_ITEMS.map((item) => {
