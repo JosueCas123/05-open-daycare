@@ -54,16 +54,16 @@ type KidFormState = {
 
 ## Acceptance criteria
 
-- [ ] `npm run build` termina sin errores y `npx tsc --noEmit` no reporta errores.
-- [ ] En `/kids`, al pulsar "Agregar niño" se abre un modal superpuesto (overlay oscuro) sobre la lista, sin cambiar de ruta.
-- [ ] El modal replica el formulario de `agregar-nino.dc.html`: header con "Cancelar" / "Agregar niño" / "Guardar", campos NOMBRE COMPLETO, FECHA DE NACIMIENTO (`dd/mm/aaaa`), SALA, ALERGIAS (ETIQUETAS) y NOTAS MÉDICAS (textarea).
-- [ ] El campo SALA muestra "Soles" preseleccionado por defecto y es la única opción.
-- [ ] "Guardar" está deshabilitado mientras falten NOMBRE COMPLETO, FECHA DE NACIMIENTO o SALA.
-- [ ] Al completar los tres campos obligatorios, "Guardar" se habilita y apunta a `#` (botón muerto, no agrega el niño).
-- [ ] "Cancelar" cierra el modal y la lista de niños permanece sin cambios.
-- [ ] Los campos ALERGIAS y NOTAS MÉDICAS son opcionales: dejar vacíos no afecta la habilitación de "Guardar".
-- [ ] No hay errores en consola al abrir/cerrar el modal.
-- [ ] La página `/kids` sigue viéndose idéntica a la de SPEC 02 con el modal cerrado.
+- [x] `npm run build` termina sin errores y `npx tsc --noEmit` no reporta errores.
+- [x] En `/kids`, al pulsar "Agregar niño" se abre un modal superpuesto (overlay oscuro) sobre la lista, sin cambiar de ruta.
+- [x] El modal replica el formulario de `agregar-nino.dc.html`: header con "Cancelar" / "Agregar niño" / "Guardar", campos NOMBRE COMPLETO, FECHA DE NACIMIENTO (`dd/mm/aaaa`), SALA, ALERGIAS (ETIQUETAS) y NOTAS MÉDICAS (textarea).
+- [x] El campo SALA muestra "Soles" preseleccionado por defecto y es la única opción.
+- [x] "Guardar" está deshabilitado mientras falten NOMBRE COMPLETO, FECHA DE NACIMIENTO o SALA.
+- [x] Al completar los tres campos obligatorios, "Guardar" se habilita y apunta a `#` (botón muerto, no agrega el niño).
+- [x] "Cancelar" cierra el modal y la lista de niños permanece sin cambios.
+- [x] Los campos ALERGIAS y NOTAS MÉDICAS son opcionales: dejar vacíos no afecta la habilitación de "Guardar".
+- [x] No hay errores en consola al abrir/cerrar el modal.
+- [x] La página `/kids` sigue viéndose idéntica a la de SPEC 02 con el modal cerrado.
 
 ## Decisions
 
