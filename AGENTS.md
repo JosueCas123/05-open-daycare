@@ -14,7 +14,17 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **React 19.2.8** — `LayoutProps<"/">` is the typed layout children prop (not `React.ReactNode`)
 - **Tailwind CSS v4** — configured via `@tailwindcss/postcss` plugin, uses `@import "tailwindcss"` + `@theme inline` in CSS (no `tailwind.config.*` file)
 - **TypeScript** strict mode, `@/*` path alias maps to repo root
-- **Supabase** — Backend-as-a-Service (PostgreSQL, Auth, Edge Functions, Realtime, Storage)
+- **Supabase** — Backend-as-a-Service (PostgreSQL, Auth, Edge Functions, Realtime, Storage). La app interactúa con la base de datos usando los paquetes oficiales de Supabase para Next.js: `@supabase/supabase-js` y `@supabase/ssr` (clientes SSR/browser y server).
+
+## Cliente Supabase en la app
+
+- Usar **siempre los paquetes oficiales de Supabase** (`@supabase/supabase-js`, `@supabase/ssr`) para interactuar con la base de datos desde el código de la app. No usar el cliente directo de la API REST, fetch manual a la URL de Supabase, ni clientes de terceros.
+- Los helpers están en `utils/supabase/`:
+  - `utils/supabase/server.ts` → `createClient(cookieStore)` para Server Components / Server Actions.
+  - `utils/supabase/client.ts` → `createBrowserClient(...)` para código cliente (event handlers, effects).
+  - `utils/supabase/middleware.ts` → `createClient(request)` para refrescar la sesión en `proxy.ts`.
+- El refresco de sesión se hace desde `proxy.ts` (en Next 16 `middleware.ts` está deprecado) usando el helper de `utils/supabase/middleware.ts`.
+- Las credenciales viven en `.env.local` (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`) y se inyectan con `process.env.*`. El archivo `.env.local` está gitignoreado: nunca commitear credenciales.
 
 ## Commands
 
