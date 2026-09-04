@@ -1,6 +1,6 @@
 # SPEC 08 — Crear tabla users y enumeraciones
 
-> **Estado:** Aprobado
+> **Estado:** Implementado
 > **Depende de:** SPEC 07
 > **Fecha:** 2026-09-04
 > **Objetivo:** Crear la tabla `users` en Supabase con los enums `user_role` y `user_status`, RLS con acceso por daycare, y un usuario staff de prueba (josue@google.com).
@@ -21,8 +21,8 @@
   - `created_at` / `updated_at` timestamptz
 - Habilitar RLS en `users`.
 - Políticas RLS:
-  - SELECT: usuario autenticado puede leer su propia fila O filas de usuarios del mismo `daycare_id`.
-  - INSERT: usuario autenticado puede insertar su propia fila (self-signup) O filas en su mismo `daycare_id` (staff agrega padres).
+  - SELECT: usuario autenticado puede leer solo su propia fila.
+  - INSERT: usuario autenticado puede insertar su propia fila (self-signup) O filas en su mismo `daycare_id` (staff agrega padres), vía función `security definer` `current_user_daycare_id()`.
   - UPDATE: usuario autenticado puede actualizar solo su propia fila.
   - DELETE: usuario autenticado puede eliminar solo su propia fila.
 - Aplicar migración vía `supabase_apply_migration`.
@@ -56,22 +56,29 @@ CREATE TABLE public.users (
   updated_at timestamptz NOT NULL DEFAULT now()
 );
 
+-- Función helper (bypass RLS) que devuelve el daycare del usuario autenticado
+CREATE OR REPLACE FUNCTION public.current_user_daycare_id()
+RETURNS uuid
+LANGUAGE sql
+STABLE
+SECURITY DEFINER
+SET search_path = public
+AS $$
+  SELECT daycare_id FROM public.users WHERE id = auth.uid()
+$$;
+
 -- RLS
 ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
 
--- SELECT: propio row o mismo daycare
-CREATE POLICY "Users can read own profile or same daycare"
+-- SELECT: solo propio row
+CREATE POLICY "Users can read own profile"
   ON public.users FOR SELECT
-  USING (auth.uid() = id OR daycare_id IN (
-    SELECT daycare_id FROM public.users WHERE id = auth.uid()
-  ));
+  USING (auth.uid() = id);
 
 -- INSERT: self-signup o mismo daycare
 CREATE POLICY "Users can insert own profile or same daycare"
   ON public.users FOR INSERT
-  WITH CHECK (auth.uid() = id OR daycare_id IN (
-    SELECT daycare_id FROM public.users WHERE id = auth.uid()
-  ));
+  WITH CHECK (auth.uid() = id OR daycare_id = public.current_user_daycare_id());
 
 -- UPDATE: solo propio row
 CREATE POLICY "Users can update own profile"
@@ -91,6 +98,7 @@ CREATE POLICY "Users can delete own profile"
 1. Crear `supabase/migrations/` si no existe.
 2. Guardar `supabase/migrations/20260904020000_create_users_table.sql` con enums + tabla + RLS.
 3. Aplicar migración vía `supabase_apply_migration`.
+3b. Guardar y aplicar `supabase/migrations/20260904030000_fix_users_rls_recursion.sql` (función `security definer` `current_user_daycare_id()` + políticas sin recursión).
 4. Verificar enums con `\dT` o query directa.
 5. Verificar tabla `users` con `supabase_list_tables` (verbose).
 6. Crear usuario staff en `auth.users` (josue@google.com / Abc123) via `execute_sql` con password hash.
@@ -101,19 +109,19 @@ CREATE POLICY "Users can delete own profile"
 
 ## Acceptance criteria
 
-- [ ] Enums `user_role` y `user_status` existen en la base de datos.
-- [ ] Tabla `users` con columnas: `id`, `daycare_id`, `role`, `status`, `full_name`, `avatar_url`, `created_at`, `updated_at`.
-- [ ] RLS habilitado con 4 políticas (SELECT, INSERT, UPDATE, DELETE).
-- [ ] Usuario staff `josue@google.com` existe en `auth.users` y `public.users` con role `staff`.
-- [ ] `npm run build` sin errores.
-- [ ] `npx tsc --noEmit` sin errores.
+- [x] Enums `user_role` y `user_status` existen en la base de datos.
+- [x] Tabla `users` con columnas: `id`, `daycare_id`, `role`, `status`, `full_name`, `avatar_url`, `created_at`, `updated_at`.
+- [x] RLS habilitado con 4 políticas (SELECT, INSERT, UPDATE, DELETE) sin recursión (`42P17`).
+- [x] Usuario staff `josue@google.com` existe en `auth.users` y `public.users` con role `staff`.
+- [x] `npm run build` sin errores.
+- [x] `npx tsc --noEmit` sin errores.
 
 ## Decisions
 
 - **Sí:** Enums como tipos Postgres (no text con check) — más robusto y con autocompletado en herramientas.
 - **Sí:** `id` es FK directa a `auth.users(id)` ON DELETE CASCADE — un usuario solo existe si existe en Auth.
-- **Sí:** RLS con SELECT amplio (propio row + mismo daycare) — necesario para que el staff vea la lista de padres.
-- **Sí:** INSERT permite self-signup (`auth.uid() = id`) y staff agrega padres (mismo daycare).
+- **Sí (decisión 2026-09-04, Opción C):** la SELECT original con subquery recursiva sobre `users` causaba `42P17: infinite recursion`. Se corrigió limitando SELECT a la propia fila y usando la función `security definer` `current_user_daycare_id()` para el INSERT del mismo daycare. La lectura por daycare (staff ve lista de padres) queda para una spec futura.
+- **Sí:** INSERT permite self-signup (`auth.uid() = id`) y staff agrega padres (mismo daycare), implementado con `security definer` para evitar recursión.
 - **Sí:** Usuario staff creado directamente (no via UI/trigger) — desbloquea desarrollo inmediato.
 - **No:** Trigger automático, campos de notificaciones, UI — specs futuras.
 
@@ -121,7 +129,7 @@ CREATE POLICY "Users can delete own profile"
 
 | Riesgo | Mitigación |
 | ------ | ---------- |
-| INSERT policy con subquery puede ser lenta en tablas grandes | Por ahora pocas filas; optimizar con `daycare_id = NEW.daycare_id` si hay problemas de performance. |
+| SELECT/INSERT policy con subquery recursiva sobre `users` causa `42P17: infinite recursion` | Función `security definer` `current_user_daycare_id()` que elude RLS internamente; SELECT limitado a la propia fila. |
 | Usuario staff insertado manualmente podría tener problemas con RLS si `daycare_id` es NULL | Insertar con `daycare_id` apuntando a una de las guarderías de prueba de SPEC 07. |
 
 ## What is **not** in this spec
