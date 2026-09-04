@@ -14,6 +14,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - **React 19.2.8** — `LayoutProps<"/">` is the typed layout children prop (not `React.ReactNode`)
 - **Tailwind CSS v4** — configured via `@tailwindcss/postcss` plugin, uses `@import "tailwindcss"` + `@theme inline` in CSS (no `tailwind.config.*` file)
 - **TypeScript** strict mode, `@/*` path alias maps to repo root
+- **Supabase** — Backend-as-a-Service (PostgreSQL, Auth, Edge Functions, Realtime, Storage)
 
 ## Commands
 
@@ -42,6 +43,7 @@ The `references/pantallas/` directory contains HTML prototypes built with a cust
 
 - **Playwright MCP**: Use Playwright tools for screenshots and browser interaction. Save all Playwright output to `.playwright-mcp/`.
 - **Context7 MCP**: Use for fetching framework documentation (Next.js, Tailwind, etc.).
+- **Supabase MCP**: Use for database operations, auth, edge functions, realtime, storage, and project management. Tools include `list_tables`, `apply_migration`, `execute_sql`, `get_logs`, `get_advisors`, etc.
 
 ## Spec Drive Develoment
 
@@ -49,6 +51,14 @@ The `references/pantallas/` directory contains HTML prototypes built with a cust
 - /spec-impl Usaremos esta skill para hacer las implementaciones.
 - /spec-verify Usaremos este agente (`.opencode/agents/spec-verify.md`) para verificar los criterios de aceptación de una spec contra la app implementada y marcar los checkboxes.
 
+## Skills
+
+- **spec** (`.agents/skills/spec/`) — Diseña y desarrolla specs siguiendo el método spec-driven, preguntando preguntas de clarificación antes de proponer la estructura.
+- **spec-impl** (`.agents/skills/spec-impl/`) — Implementa una spec aprobada: valida que el estado sea "Approved", crea una rama git con el nombre de la spec y la implementa paso a paso.
+- **supabase** (`.agents/skills/supabase/`) — Guía para trabajar con cualquier producto de Supabase: Database, Auth, Edge Functions, Realtime, Storage, Vectors, Cron, Queues, clientes SSR (supabase-js, @supabase/ssr), migraciones, RLS, debugging de errores y logs.
+- **supabase-postgres-best-practices** (`.agents/skills/supabase-postgres-best-practices/`) — Cargar ANTES de escribir o modificar cualquier cosa en Postgres: creación/alteración de tablas y columnas, tipos de columnas, diseño de esquemas, migraciones, políticas RLS y sus tests, índices, triggers, funciones de BD, colas/jobs programados, pgvector y restauración de dumps. También para diagnosticar queries lentas, alta CPU, timeouts, planes EXPLAIN, etc.
+
 ## Reglas de codigo
 
 - Usar codigo limpio, nombres, funciones,variables, etc. en ingles
+- Antes de hacer cambios de esquema o escribir SQL en Supabase, cargar la skill `supabase-postgres-best-practices`.
