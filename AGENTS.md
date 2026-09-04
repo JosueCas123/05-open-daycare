@@ -51,6 +51,11 @@ The `references/pantallas/` directory contains HTML prototypes built with a cust
 - /spec-impl Usaremos esta skill para hacer las implementaciones.
 - /spec-verify Usaremos este agente (`.opencode/agents/spec-verify.md`) para verificar los criterios de aceptación de una spec contra la app implementada y marcar los checkboxes.
 
+### Organización de specs
+
+- `spec/database/` — Specs que involucran esquema de base de datos, migraciones, tablas, columnas, RLS, etc.
+- `spec/` — Specs de funcionalidad general (UI, lógica de negocio, integraciones, etc.)
+
 ## Skills
 
 - **spec** (`.agents/skills/spec/`) — Diseña y desarrolla specs siguiendo el método spec-driven, preguntando preguntas de clarificación antes de proponer la estructura.
