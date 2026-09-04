@@ -43,7 +43,7 @@ The `references/pantallas/` directory contains HTML prototypes built with a cust
 
 - **Playwright MCP**: Use Playwright tools for screenshots and browser interaction. Save all Playwright output to `.playwright-mcp/`.
 - **Context7 MCP**: Use for fetching framework documentation (Next.js, Tailwind, etc.).
-- **Supabase MCP**: Use for database operations, auth, edge functions, realtime, storage, and project management. Tools include `list_tables`, `apply_migration`, `execute_sql`, `get_logs`, `get_advisors`, etc.
+- **Supabase MCP**: Use for database operations, auth, edge functions, realtime, storage, and project management. Tools include `list_tables`, `apply_migration`, `execute_sql`, `get_logs`, `get_advisors`, etc. **Always use `apply_migration` for schema changes.**
 
 ## Spec Drive Develoment
 
@@ -62,3 +62,10 @@ The `references/pantallas/` directory contains HTML prototypes built with a cust
 
 - Usar codigo limpio, nombres, funciones,variables, etc. en ingles
 - Antes de hacer cambios de esquema o escribir SQL en Supabase, cargar la skill `supabase-postgres-best-practices`.
+
+## Base de Datos
+
+- **Siempre usar migraciones** para cualquier cambio en la base de datos (creación/alteración de tablas, columnas, índices, políticas RLS, etc.).
+- Usar `supabase_apply_migration` para aplicar cambios al proyecto remoto.
+- Guardar archivos de migración en `supabase/migrations/` con formato `YYYYMMDDHHMMSS_descripcion.sql`.
+- Nunca hacer cambios directos en la base de datos sin migración.
