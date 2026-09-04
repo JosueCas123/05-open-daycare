@@ -1,7 +1,15 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { sala } from "@/lib/feed-data";
+import { LoginForm } from "@/components/login-form";
+import { getCurrentUserProfile } from "@/utils/supabase/profiles";
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const { user } = await getCurrentUserProfile();
+
+  if (user) {
+    redirect("/");
+  }
   return (
     <div className="grid min-h-screen grid-cols-[1.05fr_1fr] bg-login-bg">
       <div
@@ -64,39 +72,7 @@ export default function LoginPage() {
             Ingresá para ver el día de hoy.
           </p>
 
-          <div className="mb-2 text-[12px] font-bold tracking-[.7px] text-login-label">
-            EMAIL
-          </div>
-          <input
-            type="email"
-            defaultValue="caro@opendaycare.com"
-            className="mb-[18px] w-full rounded-[14px] border-[1.5px] border-login-input-border bg-login-input-bg px-4 py-[14px] text-[15px] text-ink outline-none"
-          />
-
-          <div className="mb-2 text-[12px] font-bold tracking-[.7px] text-login-label">
-            CONTRASEÑA
-          </div>
-          <input
-            type="password"
-            placeholder="••••••••"
-            className="mb-[10px] w-full rounded-[14px] border-[1.5px] border-login-input-border bg-login-input-bg px-4 py-[14px] text-[15px] text-ink outline-none placeholder:text-login-placeholder"
-          />
-
-          <div className="mb-5 mt-0 text-right">
-            <a
-              href="#"
-              className="cursor-pointer text-[13.5px] font-bold text-coral-dark"
-            >
-              ¿Olvidaste tu contraseña?
-            </a>
-          </div>
-
-          <a
-            href="#"
-            className="block w-full rounded-[15px] bg-gradient-to-b from-coral-gradient to-coral-deep px-4 py-[15px] text-center text-base font-extrabold text-white shadow-[0_10px_22px_-8px_rgba(238,129,100,.7)]"
-          >
-            Iniciar sesión
-          </a>
+          <LoginForm />
 
           <p className="mt-6 mb-0 text-center text-[14.5px] text-login-subtext">
             ¿Te invitó la guardería?{" "}

@@ -2,16 +2,23 @@ import Link from "next/link";
 import { Sidebar } from "@/components/sidebar";
 import { KidProfile } from "@/components/kid-profile";
 import { kids } from "@/lib/ninos-data";
+import { requireUser } from "@/utils/supabase/profiles";
 
 export default async function KidProfilePage({
   params,
 }: PageProps<"/kids/[id]">) {
   const { id } = await params;
   const kid = kids.find((k) => k.id === id);
+  const { fullName, role, avatarLetter } = await requireUser();
 
   return (
     <div className="flex min-h-screen bg-cream">
-      <Sidebar active="ninos" />
+      <Sidebar
+        active="ninos"
+        fullName={fullName}
+        role={role}
+        avatarLetter={avatarLetter}
+      />
 
       <main className="h-screen min-w-0 flex-1 overflow-y-auto">
         <div className="mx-auto w-full max-w-[820px] px-10 pb-20 pt-[34px]">

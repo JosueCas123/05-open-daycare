@@ -1,11 +1,15 @@
 import { Sidebar } from "@/components/sidebar";
 import { PostCard } from "@/components/post-card";
-import { currentUser, posts, sala } from "@/lib/feed-data";
+import { posts, sala } from "@/lib/feed-data";
+import { requireUser } from "@/utils/supabase/profiles";
 
-export default function Home() {
+export default async function Home() {
+  const { fullName, role, avatarLetter } = await requireUser();
+  const firstName = fullName.split(" ")[0];
+
   return (
     <div className="flex min-h-screen bg-cream">
-      <Sidebar />
+      <Sidebar fullName={fullName} role={role} avatarLetter={avatarLetter} />
 
       <main className="h-screen min-w-0 flex-1 overflow-y-auto">
         <div className="mx-auto w-full max-w-[760px] px-10 pb-20 pt-[34px]">
@@ -14,7 +18,7 @@ export default function Home() {
               {sala.nursery}
             </div>
             <h1 className="m-0 font-display text-[30px] font-semibold text-ink">
-              {sala.greeting}
+              Buenas, {firstName}
             </h1>
             <p className="mt-[5px] text-[14.5px] text-muted-strong">
               {sala.summary}
@@ -26,7 +30,7 @@ export default function Home() {
             className="mb-6 flex items-center gap-[14px] rounded-[18px] border border-line bg-card px-[18px] py-[14px] shadow-[0_4px_14px_-10px_rgba(120,90,60,.4)]"
           >
             <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-coral font-display text-base font-semibold text-white">
-              {currentUser.avatar}
+              {avatarLetter}
             </div>
             <span className="flex-1 text-[15px] text-muted">
               Compartí un momento…

@@ -2,11 +2,19 @@ import { Sidebar } from "@/components/sidebar";
 import { KidCard } from "@/components/kid-card";
 import { AddKidModal } from "@/components/add-kid-modal";
 import { kids } from "@/lib/ninos-data";
+import { requireUser } from "@/utils/supabase/profiles";
 
-export default function KidsPage() {
+export default async function KidsPage() {
+  const { fullName, role, avatarLetter } = await requireUser();
+
   return (
     <div className="flex min-h-screen bg-cream">
-      <Sidebar active="ninos" />
+      <Sidebar
+        active="ninos"
+        fullName={fullName}
+        role={role}
+        avatarLetter={avatarLetter}
+      />
 
       <main className="h-screen min-w-0 flex-1 overflow-y-auto">
         <div className="mx-auto w-full max-w-[880px] px-10 pb-20 pt-[34px]">
